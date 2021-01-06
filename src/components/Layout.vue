@@ -26,7 +26,7 @@ export default {
 
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-    transition: all .3s ease;
+    transition: all .25s ease;
 }
 
 .slide-fade-leave-to {
