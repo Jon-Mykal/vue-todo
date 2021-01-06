@@ -2,6 +2,7 @@ import nProgress from 'nprogress'
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import TodoList from '../views/todos/TodoList.vue'
+import TodoLayout from '../views/todos/TodoLayout.vue'
 
 const routes = [
   {
@@ -21,6 +22,24 @@ const routes = [
     path: '/todos',
     name: 'Todos',
     component: TodoList
+  },
+  {
+    path: '/todos/:id',
+    name: 'TodoLayout',
+    props: true,
+    component: TodoLayout,
+    children: [
+      {
+        path: '',
+        name: 'TodoDetails',
+        component: () => import('../views/todos/Details.vue')
+      },
+      {
+        path: 'edit',
+        name: 'TodoEdit',
+        component: () => import('../views/todos/Edit.vue')
+      }
+    ]
   }
 ]
 

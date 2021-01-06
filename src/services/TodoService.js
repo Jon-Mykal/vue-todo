@@ -12,6 +12,9 @@ const apiClient = axios.create({
 export default {
     getTodos() {
         return apiClient.get('/todoitems');
+    },
+    getTodo(id) {
+        return apiClient.get(`/todoitems/${id}`)
     }
 }
 
