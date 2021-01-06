@@ -1,7 +1,7 @@
 <template>
     <section class="todo-card">
         <span>{{ todo.name }}</span>
-        <h4>Complete: {{ todo.isDone}}</h4>
+        <h4>Complete: {{ todoStatus }}</h4>
     </section>
 </template>
 
@@ -12,6 +12,14 @@ export default {
         todo: {
             type: Object,
             required: true
+        }
+    },
+    computed: {
+        todoStatus() {
+            if (this.todo.isComplete) {
+                return 'Yes';
+            }
+            return 'No';
         }
     }
 }

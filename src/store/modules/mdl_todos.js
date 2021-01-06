@@ -14,13 +14,17 @@ export const mutations = {
 }
 
 export const actions = {
-    fetchTodos({ commit }) {
-       return TodoService.getTodos()
+    fetchTodos({ commit, dispatch }) {
+        return TodoService.getTodos()
             .then(response => {
                 commit('SET_TODOS', response.data)
             })
             .catch(error => {
-                console.log(`There was an error: ${error.response}`);
+                const notification = {
+                    type: 'error',
+                    message: `There was a problem getting todos: ${error.message}`
+                };
+                dispatch('notificationMdl/add', notification, { root: true });
             })
     }
 }

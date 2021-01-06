@@ -1,7 +1,7 @@
 import nProgress from 'nprogress'
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import TodoList from '../views/TodoList.vue'
+import TodoList from '../views/todos/TodoList.vue'
 
 const routes = [
   {
