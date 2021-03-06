@@ -24,6 +24,11 @@ const routes = [
     component: TodoList
   },
   {
+    path: '/account/register',
+    name: 'Register',
+    component: () => import('../views/account/Register.vue')
+  },
+  {
     path: '/todos/:id',
     name: 'TodoLayout',
     props: true,
