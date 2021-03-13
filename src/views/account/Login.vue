@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form action="" @submit.prevent="registerUser">
+        <form action="" @submit.prevent="loginUser">
             <section class="form-group">
                 <label for="email">Email</label>
                 <input type="text" name="email" id="email" v-model="email">
@@ -23,15 +23,15 @@ import { useStore } from 'vuex'
             let password = ref("");
 
             const store = useStore();
-            let registerUser = () => {
+            let loginUser = () => {
                 // Call Vuex action.
-                store.dispatch('authMdl/register', {
+                store.dispatch('authMdl/login', {
                     email: email.value,
                     password: password.value
                 });
             }
 
-            return { email, password, registerUser};
+            return { email, password, loginUser};
         }
     }
 </script>

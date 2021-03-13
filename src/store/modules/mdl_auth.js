@@ -10,7 +10,13 @@ export const mutations = {
 }
 
 export const actions = {
-    
+    register({ commit }, userCreds) {
+      // commit("");
+      console.log(userCreds);
+    },
+    login({ commit }, userCreds) {
+      console.log(userCreds);
+    }
 }
 
 export const getters = {
