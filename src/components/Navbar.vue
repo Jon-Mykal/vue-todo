@@ -5,10 +5,10 @@
             <router-link :to="{ name: 'Home' }">Home</router-link>
         </li>
         <li class="nav-item">
-            <router-link :to="{ name: 'Todos' }">Todos</router-link>
+            <router-link :to="{ name: 'About' }">About</router-link>
         </li>
         <li class="nav-item">
-            <router-link :to="{ name: 'About' }">About</router-link>
+            <router-link :to="{ name: 'Register' }">Register</router-link>
         </li>
     </ul>
 </nav>

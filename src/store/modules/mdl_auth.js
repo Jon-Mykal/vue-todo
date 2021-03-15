@@ -1,4 +1,4 @@
-import {AuthService as authSvc}  from '@/services/AuthService.js'
+import AuthService from '@/services/AuthService.js'
 
 export const namespaced = true;
 export const state = {
@@ -6,13 +6,27 @@ export const state = {
 }
 
 export const mutations = {
-    
+    SET_USER_DATA(state, userData) {
+      state.user = userData;
+      localStorage.setItem('user', JSON.stringify(userData));
+      AuthService.apiClient.defaults.headers.common['Authorization'] = `Bearer ${
+        userData.accessToken
+      }`
+    }
 }
 
 export const actions = {
-    register({ commit }, userCreds) {
+    async register({ commit }, userCreds) {
       // commit("");
-      console.log(userCreds);
+      try{
+        let res = await AuthService.register(userCreds);
+        commit('SET_USER_DATA', res.data)
+      }
+      catch(e) {
+        console.log(`Something went wrong ${e}`);
+      }
+      
+    
     },
     login({ commit }, userCreds) {
       console.log(userCreds);

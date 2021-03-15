@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import TodoList from '../views/todos/TodoList.vue'
 import TodoLayout from '../views/todos/TodoLayout.vue'
+import NotFound from '../views/NotFound.vue'
 
 const routes = [
   {
@@ -45,6 +46,11 @@ const routes = [
         component: () => import('../views/todos/Edit.vue')
       }
     ]
+  },
+  {
+    path: '/:catchAll(.*)',
+    name: 'NotFound',
+    component: NotFound
   }
 ]
 
