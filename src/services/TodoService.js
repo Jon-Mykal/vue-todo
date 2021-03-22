@@ -1,20 +1,25 @@
 import axios from 'axios'
 
-const apiClient = axios.create({
-    baseURL: 'https://localhost:44353/api',
-    withCredentials: false,
-    headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-    }
-});
 
-export default {
+
+export default class {
+   apiClient;
+    constructor(){
+        this.apiClient = axios.create({
+            baseURL: 'https://localhost:6001/api',
+            withCredentials: false,
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
+    }
     getTodos() {
-        return apiClient.get('/todoitems');
-    },
+        return this.apiClient.get('/todoitems');
+    }
+
     getTodo(id) {
-        return apiClient.get(`/todoitems/${id}`)
+        return this.apiClient.get(`/todoitems/${id}`)
     }
 }
 

@@ -12,6 +12,7 @@ import TodoCard  from "@/components/TodoCard.vue";
 import NotificationContainer from '@/components/NotificationContainer.vue'
 
 import { mapActions, mapState } from "vuex";
+import { authComputed } from '../../store/helpers.js';
 export default {
     name: 'Todos',
     components: {
@@ -25,7 +26,8 @@ export default {
        this.reset();
     },
     computed: {
-        ...mapState('todoMdl', ['todos'])
+        ...mapState('todoMdl', ['todos']),
+        ...authComputed
     },
     methods: {
         ...mapActions('todoMdl', ['fetchTodos']),

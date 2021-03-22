@@ -14,6 +14,6 @@ export default {
         return apiClient.post("/register", userCreds);
     },
     login(userCreds) {
-        return apiClient.post("/register", userCreds);
+        return apiClient.post("/login", userCreds);
     }
 }

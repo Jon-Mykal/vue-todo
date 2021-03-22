@@ -30,6 +30,11 @@ const routes = [
     component: () => import('../views/account/Register.vue')
   },
   {
+    path: '/account/login',
+    name: 'Login',
+    component: () => import('../views/account/Login.vue')
+  },
+  {
     path: '/todos/:id',
     name: 'TodoLayout',
     props: true,
@@ -59,6 +64,7 @@ const router = createRouter({
   routes
 })
 
+// This sets up a global guard for a progress bar
 router.beforeEach((routeTo, routeFrom, next) => {
   nProgress.start();
   next();

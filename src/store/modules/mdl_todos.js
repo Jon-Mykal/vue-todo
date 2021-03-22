@@ -1,5 +1,6 @@
 import TodoService from '@/services/TodoService.js'
 
+const todoSvc = new TodoService();
 export const namespaced = true;
 export const state = {
     todos: [],
@@ -17,8 +18,16 @@ export const mutations = {
 }
 
 export const actions = {
-    fetchTodos({ commit, dispatch }) {
-        return TodoService.getTodos()
+    fetchTodos({ commit, dispatch, rootGetters }) {
+        let loggedIn = rootGetters['authMdl/loggedIn'];
+     
+        if (loggedIn) {
+            let user = rootGetters['authMdl/loggedInUser'];
+            todoSvc.apiClient.defaults.headers.common['Authorization'] = `Bearer ${
+                user.accessToken
+              }`
+        }
+        return todoSvc.getTodos()
             .then(response => {
                 commit('SET_TODOS', response.data)
             })
@@ -37,7 +46,7 @@ export const actions = {
             commit('SET_TODO', todo);
         }
         else {
-            return TodoService.getTodo(id)
+            return todoSvc.getTodo(id)
             .then(response => {
                 commit('SET_TODO', response.data)
             })

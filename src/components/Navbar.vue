@@ -10,6 +10,9 @@
         <li class="nav-item">
             <router-link :to="{ name: 'Register' }">Register</router-link>
         </li>
+        <li class="nav-item">
+            <router-link :to="{ name: 'Login' }">Login</router-link>
+        </li>
     </ul>
 </nav>
 </template>

@@ -9,7 +9,7 @@
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" v-model="password">
             </section>
-            <button type="submit">Register</button>
+            <button type="submit">Login</button>
         </form>
     </div>
 </template>
@@ -17,8 +17,11 @@
 <script>
 import { ref, watchEffect } from "vue"
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+
     export default {
         setup(props, { }) {
+            const router = useRouter();
             let email = ref("");
             let password = ref("");
 
@@ -28,6 +31,8 @@ import { useStore } from 'vuex'
                 store.dispatch('authMdl/login', {
                     email: email.value,
                     password: password.value
+                }).then(() => {
+                    router.push({ name: 'Todos'});
                 });
             }
 

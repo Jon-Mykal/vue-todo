@@ -1,4 +1,6 @@
 import AuthService from '@/services/AuthService.js'
+import axios from 'axios';
+import { mapGetters } from 'vuex';
 
 export const namespaced = true;
 export const state = {
@@ -9,7 +11,7 @@ export const mutations = {
     SET_USER_DATA(state, userData) {
       state.user = userData;
       localStorage.setItem('user', JSON.stringify(userData));
-      AuthService.apiClient.defaults.headers.common['Authorization'] = `Bearer ${
+      axios.defaults.headers.common['Authorization'] = `Bearer ${
         userData.accessToken
       }`
     }
@@ -20,19 +22,31 @@ export const actions = {
       // commit("");
       try{
         let res = await AuthService.register(userCreds);
-        commit('SET_USER_DATA', res.data)
+        commit('SET_USER_DATA', res.data);
       }
       catch(e) {
         console.log(`Something went wrong ${e}`);
-      }
-      
-    
+      }      
     },
-    login({ commit }, userCreds) {
-      console.log(userCreds);
+    async login({ commit }, userCreds) {
+      try {
+        let res = await AuthService.login(userCreds);
+        // Commit mutation to MUTATE the STATE.
+        commit('SET_USER_DATA', res.data);
+      } catch (e) {
+        console.log(`Something went wrong ${e}`);
+      }
+    },
+    isLoggedIn({ getters }) {
+        return getters.loggedIn;
     }
 }
 
 export const getters = {
-    
+    loggedIn (state) {
+      return !!state.user;
+    },
+    loggedInUser(state) {
+      return state.user;
+    }
 }
