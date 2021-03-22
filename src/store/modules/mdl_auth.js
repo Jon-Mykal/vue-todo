@@ -44,6 +44,9 @@ export const actions = {
 
 export const getters = {
     loggedIn (state) {
+      if (localStorage.getItem('user')) {
+        state.user = JSON.parse(localStorage.getItem('user'));
+      }
       return !!state.user;
     },
     loggedInUser(state) {

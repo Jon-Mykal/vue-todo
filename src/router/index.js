@@ -4,7 +4,7 @@ import Home from '../views/Home.vue'
 import TodoList from '../views/todos/TodoList.vue'
 import TodoLayout from '../views/todos/TodoLayout.vue'
 import NotFound from '../views/NotFound.vue'
-
+import store from '../store/index.js';
 const routes = [
   {
     path: '/',
@@ -22,7 +22,8 @@ const routes = [
   {
     path: '/todos',
     name: 'Todos',
-    component: TodoList
+    component: TodoList,
+    meta: { requiresAuth: true} // Meta allows custom attributes to the route
   },
   {
     path: '/account/register',
@@ -65,9 +66,18 @@ const router = createRouter({
 })
 
 // This sets up a global guard for a progress bar
-router.beforeEach((routeTo, routeFrom, next) => {
+router.beforeEach( async (routeTo, routeFrom, next) => {
   nProgress.start();
-  next();
+  const loggedIn = await store.dispatch("authMdl/isLoggedIn");
+
+  if (routeTo.matched.some(record => record.meta.requiresAuth) && !loggedIn) {
+    // Redirect to home page
+    next('/');
+  }
+  else {
+    next();
+  }
+  
 })
 
 router.afterEach(() => {
