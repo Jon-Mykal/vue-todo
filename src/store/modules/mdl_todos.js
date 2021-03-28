@@ -18,8 +18,8 @@ export const mutations = {
 }
 
 export const actions = {
-    fetchTodos({ commit, dispatch, rootGetters }) {
-        let loggedIn = dispatch('authMdl/isLoggedIn');
+    async fetchTodos({ commit, dispatch, rootGetters }) {
+        let loggedIn = await dispatch("authMdl/isLoggedIn", null, {root: true});
      
         if (loggedIn) {
             let user = rootGetters['authMdl/loggedInUser'];

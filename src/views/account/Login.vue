@@ -17,14 +17,19 @@
 <script>
 import { ref, watchEffect } from "vue"
 import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
     export default {
-        setup(props, { }) {
+        setup(props, context) {
+            // Access both route and router this way with composition api
             const router = useRouter();
+            const route = useRoute();
+            let redirectPath = route.query.redirectPath;
             let email = ref("");
             let password = ref("");
 
+
+            console.log(route.query);
             const store = useStore();
             let loginUser = () => {
                 // Call Vuex action.
@@ -32,7 +37,7 @@ import { useRouter } from 'vue-router'
                     email: email.value,
                     password: password.value
                 }).then(() => {
-                    router.push({ name: 'Todos'});
+                    router.push({ path: redirectPath });
                 });
             }
 

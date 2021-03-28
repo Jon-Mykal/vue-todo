@@ -33,7 +33,8 @@ const routes = [
   {
     path: '/account/login',
     name: 'Login',
-    component: () => import('../views/account/Login.vue')
+    component: () => import('../views/account/Login.vue'),
+    props: true
   },
   {
     path: '/todos/:id',
@@ -72,11 +73,17 @@ router.beforeEach( async (routeTo, routeFrom, next) => {
 
   if (routeTo.matched.some(record => record.meta.requiresAuth) && !loggedIn) {
     // Redirect to home page
-    next('/');
+    next({
+      path: '/account/login',
+      query: { redirectPath: routeTo.fullPath }
+    });
   }
-  else {
-    next();
-  }
+  else if(routeTo.matched.some(record => record.name == "Login" || record.name == "Register") && loggedIn) {
+      next("/");
+    }
+    else {
+      next();
+    }
   
 })
 

@@ -14,6 +14,9 @@ export const mutations = {
       axios.defaults.headers.common['Authorization'] = `Bearer ${
         userData.accessToken
       }`
+    },
+    CLEAR_USER_DATA() {
+      location.reload();
     }
 }
 
@@ -39,6 +42,10 @@ export const actions = {
     },
     isLoggedIn({ getters }) {
         return getters.loggedIn;
+    },
+    logout({commit}){
+        localStorage.removeItem("user");
+        commit("CLEAR_USER_DATA");
     }
 }
 
