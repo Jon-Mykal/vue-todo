@@ -1,5 +1,11 @@
 <template>
   <div class="about">
+    <SimplePropComp>
+      Slot to show here
+      <template v-slot:page>
+          Empty
+      </template>
+    </SimplePropComp>
     <p>Spaces Left: {{ spacesLeft }} out of {{ capacity }}</p>
     <h2>Attending</h2>
     <ul>
@@ -17,11 +23,18 @@
 
 <script>
 import { computed, onMounted, onUnmounted, onUpdated, reactive, toRefs, ref, watch, watchEffect } from 'vue'
+import SimplePropComp from "@/components/SimplePropComp"
 export default {
+  components: {
+    SimplePropComp
+  },
     setup() {
       // Two methods of using reactivity.
+      // 1. Reactive References.
       const attending = ref(["Tim", "Bob", "Joe"]);
       const name = ref("");
+
+      // 2. Reactive Objects
       const event = reactive({
         capacity: 4,
         spacesLeft: computed(() => { return event.capacity - attending.value.length; })

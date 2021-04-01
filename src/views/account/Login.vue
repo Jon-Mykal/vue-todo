@@ -29,16 +29,29 @@ import { useRoute, useRouter } from 'vue-router'
             let password = ref("");
 
 
-            console.log(route.query);
+           // console.log(route.query);
             const store = useStore();
-            let loginUser = () => {
+            let loginUser = async () => {
                 // Call Vuex action.
-                store.dispatch('authMdl/login', {
-                    email: email.value,
-                    password: password.value
-                }).then(() => {
+                //   store.dispatch('authMdl/login', {
+                //         email: email.value,
+                //         password: password.value
+                //     }).then(() => {
+                //         router.push({ path: redirectPath });
+                //     })
+                //     .catch(e => {
+                //         console.log(e);
+                //     });
+                try {
+                    await store.dispatch('authMdl/login', {
+                        email: email.value,
+                        password: password.value
+                    });
                     router.push({ path: redirectPath });
-                });
+                }
+                catch(e) {
+                    console.log(e);
+                }
             }
 
             return { email, password, loginUser};

@@ -22,23 +22,15 @@ export const mutations = {
 
 export const actions = {
     async register({ commit }, userCreds) {
-      // commit("");
-      try{
-        let res = await AuthService.register(userCreds);
-        commit('SET_USER_DATA', res.data);
-      }
-      catch(e) {
-        console.log(`Something went wrong ${e}`);
-      }      
+      let res = await AuthService.register(userCreds);
+      commit('SET_USER_DATA', res.data);     
     },
     async login({ commit }, userCreds) {
-      try {
-        let res = await AuthService.login(userCreds);
-        // Commit mutation to MUTATE the STATE.
-        commit('SET_USER_DATA', res.data);
-      } catch (e) {
-        console.log(`Something went wrong ${e}`);
-      }
+      // Intentionally not wrapped in try/catch.
+      // Handled in component
+      let res = await AuthService.login(userCreds);
+      // Commit mutation to MUTATE the STATE.
+      commit('SET_USER_DATA', res.data);
     },
     isLoggedIn({ getters }) {
         return getters.loggedIn;
