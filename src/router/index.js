@@ -1,5 +1,6 @@
 import nProgress from 'nprogress'
 import { createRouter, createWebHistory } from 'vue-router'
+import CompositionDemos from '../views/CompositionDemos.vue'
 import Home from '../views/Home.vue'
 import TodoList from '../views/todos/TodoList.vue'
 import TodoLayout from '../views/todos/TodoLayout.vue'
@@ -58,6 +59,11 @@ const routes = [
     path: '/:catchAll(.*)',
     name: 'NotFound',
     component: NotFound
+  },
+  {
+    path: '/compositiondemos',
+    name: 'CompositionDemos',
+    component: CompositionDemos
   }
 ]
 
