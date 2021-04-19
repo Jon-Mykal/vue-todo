@@ -1,30 +1,43 @@
 <template>
     <div>
         <p>
-            Capacity: {{ capacity }}
+            Spaces left: {{ spacesLeft }} out of {{ capacity }}
         </p>
         <button @click="increaseCapacity()">Increase Capacity</button>
         <button @click="decreaseCapacity()">Decrease Capacity</button>
+        <h2>Attending</h2>
+        <ul>
+            <li v-for="(firstName, index) in attending" :key="index">
+                {{ firstName }}
+            </li>
+        </ul>
+
+        <input type="text" v-model="name">
+        <p>{{ name }}</p>
+        <p>{{ letterCount }}</p>
     </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { useEventSpace, useMapping } from '@/use/event-space.js'
+import { ref, watch, watchEffect } from 'vue'
     export default {
         setup(props, ctx) {
-            const capacity = ref(3);
+            const { capacity, spacesLeft, increaseCapacity, decreaseCapacity, attending } = useEventSpace(ctx);
+            const { name } = useMapping();
+            const letterCount = ref(0);
 
-            let increaseCapacity = () => {
-                capacity.value++;
-                ctx.emit('capacityChanged');
-            }
+            // Watch syntax (source, fn, options?)
+            // Use Watch for specific properties to be watched
+            // watch(name, () => {
+            //     console.log("Gregg");
+            // });
 
-            let decreaseCapacity = () => {
-                capacity.value--;
-                ctx.emit('capacityChanged');
-            }
-            
-            return { capacity, increaseCapacity, decreaseCapacity };
+            watchEffect(() => {
+                console.log("Gregg");
+            })
+            // return { capacity };
+            return { capacity, spacesLeft, increaseCapacity, decreaseCapacity, name, attending, letterCount };
         }
     }
 </script>

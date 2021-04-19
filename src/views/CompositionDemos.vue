@@ -15,8 +15,12 @@ import { ref } from 'vue';
         },
         setup() {
             const message = ref("");
+            // Handle capacity changed event
             let onCapacityChanged = () => {
                 message.value = "Capacity has changed!";
+                setTimeout(() => {
+                    message.value = '';
+                }, 2500);
             };
 
             return { message, onCapacityChanged };
