@@ -25,3 +25,9 @@ export function useMapping() {
     const name = ref("");
     return { name };
 }
+
+export async function addDelay() {
+    setTimeout(() => {
+        console.log("Worked!");
+    }, 5000);
+}

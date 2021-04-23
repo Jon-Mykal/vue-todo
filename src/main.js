@@ -5,4 +5,5 @@ import store from './store'
 import 'nprogress/nprogress.css'
 import './styles.css'
 
+
 createApp(App).use(store).use(router).mount('#app')

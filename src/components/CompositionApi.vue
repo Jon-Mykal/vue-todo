@@ -19,12 +19,13 @@
 </template>
 
 <script>
-import { useEventSpace, useMapping } from '@/use/event-space.js'
+import { useEventSpace, useMapping, addDelay } from '@/use/event-space.js'
 import { ref, watch, watchEffect } from 'vue'
     export default {
         setup(props, ctx) {
             const { capacity, spacesLeft, increaseCapacity, decreaseCapacity, attending } = useEventSpace(ctx);
             const { name } = useMapping();
+           // await addDelay();
             const letterCount = ref(0);
 
             // Watch syntax (source, fn, options?)
@@ -33,9 +34,6 @@ import { ref, watch, watchEffect } from 'vue'
             //     console.log("Gregg");
             // });
 
-            watchEffect(() => {
-                console.log("Gregg");
-            })
             // return { capacity };
             return { capacity, spacesLeft, increaseCapacity, decreaseCapacity, name, attending, letterCount };
         }

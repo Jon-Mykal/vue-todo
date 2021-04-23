@@ -1,17 +1,20 @@
 <template>
     <div>
-        <CompositionApi @capacityChanged="onCapacityChanged()"/>
+     <CompositionApi @capacityChanged="onCapacityChanged()"/>    
+        <SimpleForm />
         <p>{{ message }}</p>
     </div>
 </template>
 
 <script>
 import CompositionApi from '@/components/CompositionApi.vue';
+import SimpleForm from '@/components/SimpleForm.vue';
 import { ref } from 'vue';
     export default {
         name: 'CompositionDemos',
         components: {
-            CompositionApi
+            CompositionApi,
+            SimpleForm
         },
         setup() {
             const message = ref("");
