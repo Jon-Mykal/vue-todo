@@ -1,30 +1,46 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+<section id="app">
+    <Navbar />
+    <!-- <router-view v-slot="{ Component }">
+        <transition name="slide-fade" mode="out-in">
+            <component :is="Component" />
+        </transition>
+    </router-view> -->
+    <router-view></router-view>
+</section>
 </template>
 
-<style>
+<script>
+import Navbar from '@/components/Navbar.vue'
+export default {
+    components: {
+        Navbar
+    }
+};
+</script>
+
+<style scoped>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
+/*** TRANSITIONS ***/
+.slide-fade-enter {
+    transform: translateX(10px);
+    opacity: 0;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+    transition: all .25s ease;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.slide-fade-leave-to {
+    transform: translateX(-10px);
+    opacity: 0;
 }
 </style>
